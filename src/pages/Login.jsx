@@ -14,32 +14,18 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
 
-    try {
-      const response = await fetch("http://localhost:8080//maniclang-medicalclinic/php/login.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      // Validate credentials
-      if (data.status === "success") {
-        setIsAuthenticated(true);
-        navigate("/");
-      } else {
-        setError(data.message);
-      }
-    } catch (error) {
+    // Validate credentials
+    if (username === "admin" && password === "admin") {
+      setIsAuthenticated(true);
+      navigate("/");
+      console.log(isAuthenticated);
+    } else {
       setError("Invalid username or password");
     }
-  }
+  };
 
   return (
     <div className="h-[100vh] grid place-content-center bg-gradient-to-r from-blue-200 to-white text-black">
@@ -87,7 +73,8 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
         <img src="123.png" alt="" />
       </div>
       </div>
-  </div>
+      
+    </div>
   );
 };
 
