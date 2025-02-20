@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Reports = () => {
   const patients = [
@@ -6,75 +6,97 @@ const Reports = () => {
     { name: 'Jane Smith', age: 25, gender: 'Female', contact: '987-654-3210' },
     { name: 'Alex Johnson', age: 40, gender: 'Other', contact: '555-666-7777' },
   ];
+
   return (
-    <div className='ml-[20%] grid grid-cols-2 h-[100vh]'>
-      <div className='px-14 pt-24 bg-white shadow-lg w-full mx-auto'>
-        <h1 className='text-3xl font-extrabold text-black mb-6'>Patient Report</h1>
-        <form className='space-y-5'>
+    <div className="ml-[20%] grid grid-cols-2 gap-x-10 h-screen bg-gray-100 p-8">
+      {/* Form Section */}
+      <div className="px-10 py-12 bg-white shadow-2xl w-full mx-auto rounded-3xl border border-gray-200">
+        <h1 className="text-4xl font-bold text-blue-700 mb-8">📝 PATIENT REPORT</h1>
+        <form className="space-y-6">
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Name</label>
-            <input type='text' name='name' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
+            <label className="block text-sm font-semibold text-gray-700">Name</label>
+            <input
+              type="text"
+              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            />
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Age</label>
-            <input type='number' name='age' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
+            <label className="block text-sm font-semibold text-gray-700">Age</label>
+            <input
+              type="number"
+              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            />
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Gender</label>
-            <select name='gender' className='mt-1 block w-full p-2 border border-gray-300 rounded-md'>
-              <option value=''>Select Gender</option>
-              <option value='Male'>Male</option>
-              <option value='Female'>Female</option>
+            <label className="block text-sm font-semibold text-gray-700">Gender</label>
+            <select
+              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Main Complaint</label>
-            <input type='text' name='complaint' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
+            <label className="block text-sm font-semibold text-gray-700">Main Complaint</label>
+            <input
+              type="text"
+              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            />
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Symptoms</label>
-            <input type='text' name='symptoms' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
+            <label className="block text-sm font-semibold text-gray-700">Symptoms</label>
+            <input
+              type="text"
+              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            />
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Medical History</label>
-            <select name='medical' className='mt-1 block w-full p-2 border border-gray-300 rounded-md'>
-              <option value=''>Select</option>
-              <option value='Male'>Yes</option>
-              <option value='Female'>No</option>
+            <label className="block text-sm font-semibold text-gray-700">Medical History</label>
+            <select
+              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            >
+              <option value="">Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </div>
 
-          <button type='submit' className='w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700'>
-            Save Report
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold"
+          >
+            ✅ Save Report
           </button>
         </form>
       </div>
-      <div className='p-14 mt-10'>
-        <h2 className='text-2xl font-bold text-black mb-4'>Patient List</h2>
-        <ul className='space-y-2'>
+
+      {/* Patient List Section with Border and Gap */}
+      <div className="border border-gray-300 rounded-3xl shadow-2xl bg-white p-8">
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">👥 PATIENT LIST</h2>
+        <ul className="space-y-6">
           {patients.map((patient, index) => (
-            <li key={index} className='p-3 border rounded-md bg-gray-100 flex justify-between items-center'>
+            <li
+              key={index}
+              className="p-6 border border-gray-300 rounded-2xl bg-white shadow-lg flex justify-between items-center hover:shadow-xl transition-transform hover:scale-105"
+            >
               <div>
-                <p><strong>Name:</strong> {patient.name}</p>
-                <p><strong>Age:</strong> {patient.age}</p>
-                <p><strong>Gender:</strong> {patient.gender}</p>
-                <p><strong>Contact:</strong> {patient.contact}</p>
+                <p className="text-lg font-semibold text-gray-900">{patient.name}</p>
+                <p className="text-sm text-gray-600"><strong>Age:</strong> {patient.age}</p>
+                <p className="text-sm text-gray-600"><strong>Gender:</strong> {patient.gender}</p>
+                <p className="text-sm text-gray-600"><strong>Contact:</strong> {patient.contact}</p>
               </div>
-              <div className='flex gap-2'>
-              <button 
-                  onClick={() => handleEdit(index)}
-                  className='bg-green-500 text-black px-3 py-1 rounded-md hover:bg-green-600'>
-                  Edit/View
+              <div className="flex gap-3">
+                <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all shadow-md">
+                  ✏️ Edit/View
                 </button>
-                <button 
-                  onClick={() => handleDelete(index)}
-                  className='bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600'>
-                  Delete
+                <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-all shadow-md">
+                  ❌ Delete
                 </button>
               </div>
             </li>
@@ -82,7 +104,7 @@ const Reports = () => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Reports
+export default Reports;
