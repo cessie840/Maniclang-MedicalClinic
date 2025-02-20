@@ -14,7 +14,7 @@ const Patient = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await fetch('http://localhost/php/view_patients.php');
+      const response = await fetch('http://localhost/PHP/view_patients.php');
       const data = await response.json();
       if (data.status === 'success') {
         setPatients(data.patients);
@@ -55,8 +55,26 @@ const Patient = () => {
     }
   };
 
-  const handleDelete = async (index) => {
-    // Implement delete functionality here
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch('http://localhost/PHP/delete_patient.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      const data = await response.json();
+
+      if (data.status === 'success') {
+        fetchPatients();
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('An error occurred while deleting the patient.');
+    }
   };
 
   return (
@@ -121,8 +139,8 @@ const Patient = () => {
       <div className='p-14 mt-10'>
         <h2 className='text-2xl font-bold text-black mb-4'>Patient List</h2>
         <ul className='space-y-2'>
-          {patients.map((patient, index) => (
-            <li key={index} className='p-3 border rounded-md bg-gray-100 flex justify-between items-center'>
+          {patients.map((patient) => (
+            <li key={patient.id} className='p-3 border rounded-md bg-gray-100 flex justify-between items-center'>
               <div>
                 <p><strong>Name:</strong> {patient.name}</p>
                 <p><strong>Age:</strong> {patient.age}</p>
@@ -130,7 +148,7 @@ const Patient = () => {
                 <p><strong>Contact:</strong> {patient.contact}</p>
               </div>
               <button 
-                onClick={() => handleDelete(index)}
+                onClick={() => handleDelete(patient.id)}
                 className='bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600'>
                 Delete
               </button>
