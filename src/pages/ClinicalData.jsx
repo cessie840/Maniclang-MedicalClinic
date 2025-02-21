@@ -12,10 +12,10 @@ const ClinicalData = () => {
     <div className="ml-[20%] grid grid-cols-1 md:grid-cols-2 gap-8 h-screen p-6 bg-gray-100">
       
       {/* Left Section: Clinical Data Form */}
-      <div className="bg-white shadow-lg rounded-lg p-8">
+      <div className="shadow-lg rounded-lg p-8 bg-gradient-to-b from-blue-200 to-blue-100">
         <h1 className="text-3xl font-extrabold text-blue-700 mb-6 flex items-center gap-3">
-          <FaUserPlus className="text-blue-700" /> ADD PATIENT
-      </h1>
+          <FaUserPlus className="text-blue-700" /> CLINICAL DATA
+        </h1>
 
         <form className="space-y-5">
           <div>
@@ -64,12 +64,12 @@ const ClinicalData = () => {
       </div>
 
       {/* Right Section: Patient Report */}
-      <div className="bg-white shadow-lg rounded-lg p-8">
+      <div className="shadow-lg rounded-lg p-8 bg-gradient-to-b from-blue-200 to-blue-100">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">📝 PATIENT REPORT</h2>
 
         <ul className="space-y-4">
           {patients.map((patient, index) => (
-            <li key={index} className="p-4 border rounded-md bg-gray-50 shadow flex justify-between items-center">
+            <li key={index} className="p-4 border rounded-md bg-white shadow flex justify-between items-center">
               <div>
                 <p className="text-lg font-semibold text-gray-900">{patient.name}</p>
                 <p className="text-sm text-gray-700"><strong>Age:</strong> {patient.age}</p>
@@ -90,7 +90,6 @@ const ClinicalData = () => {
           ))}
         </ul>
       </div>
-      
     </div>
   );
 };

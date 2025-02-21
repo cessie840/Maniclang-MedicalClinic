@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
 
 const Reports = () => {
+  const [search, setSearch] = useState("");
   const patients = [
     { name: 'John Doe', age: 30, gender: 'Male', contact: '123-456-7890' },
     { name: 'Jane Smith', age: 25, gender: 'Female', contact: '987-654-3210' },
     { name: 'Alex Johnson', age: 40, gender: 'Other', contact: '555-666-7777' },
   ];
 
+  const filteredPatients = patients.filter(patient => 
+    patient.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="ml-[20%] grid grid-cols-2 gap-x-10 h-screen bg-gray-100 p-8">
       {/* Form Section */}
-      <div className="px-10 py-12 bg-white shadow-2xl w-full mx-auto rounded-3xl border border-gray-200">
-        <h1 className="text-4xl font-bold text-blue-700 mb-8">📝 PATIENT REPORT</h1>
+      <div className="px-10 py-12 bg-gradient-to-br from-blue-100 to-blue-300 shadow-2xl w-full mx-auto rounded-3xl border border-gray-200">
+        <h1 className="text-4xl font-bold text-blue-700 mb-8">📝 REPORT</h1>
         <form className="space-y-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700">Name</label>
@@ -77,10 +83,20 @@ const Reports = () => {
       </div>
 
       {/* Patient List Section with Border and Gap */}
-      <div className="border border-gray-300 rounded-3xl shadow-2xl bg-white p-8">
+      <div className="border border-gray-300 rounded-3xl shadow-2xl bg-gradient-to-br from-blue-100 to-blue-300 p-8">
         <h2 className="text-3xl font-bold text-blue-700 mb-6">👥 PATIENT LIST</h2>
+        <div className="relative mb-6">
+          <input
+            type="text"
+            placeholder="Search patients..."
+            className="w-full p-3 pl-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <Search className="absolute left-3 top-3 text-gray-500" size={20} />
+        </div>
         <ul className="space-y-6">
-          {patients.map((patient, index) => (
+          {filteredPatients.map((patient, index) => (
             <li
               key={index}
               className="p-6 border border-gray-300 rounded-2xl bg-white shadow-lg flex justify-between items-center hover:shadow-xl transition-transform hover:scale-105"
