@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import React, { useState } from "react";
+import { 
+  Search, 
+  Edit2,
+  Trash2
+} from "lucide-react";
 
 const Reports = () => {
   const [search, setSearch] = useState("");
+  const [mainComplaint, setMainComplaint] = useState("");
+  const [symptoms, setSymptoms] = useState("");
+  const [medicalHistory, setMedicalHistory] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const patients = [
     { name: 'John Doe', age: 30, gender: 'Male', contact: '123-456-7890' },
     { name: 'Jane Smith', age: 25, gender: 'Female', contact: '987-654-3210' },
@@ -14,110 +27,159 @@ const Reports = () => {
   );
 
   return (
-    <div className="ml-[20%] grid grid-cols-2 gap-x-10 h-screen bg-gray-100 p-8">
-      {/* Form Section */}
-      <div className="px-10 py-12 bg-gradient-to-br from-blue-100 to-blue-300 shadow-2xl w-full mx-auto rounded-3xl border border-gray-200">
-        <h1 className="text-4xl font-bold text-blue-700 mb-8">📝 REPORT</h1>
-        <form className="space-y-6">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700">Name</label>
-            <input
-              type="text"
-              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            />
+    <div className="ml-[20%] p-8 min-h-screen">
+      <div className="grid grid-cols-2 gap-8">
+        {/* Add Report Form */}
+        <div className="bg-blue-100 shadow-lg shadow-white rounded-xl overflow-hidden">
+          <div className="bg-blue-500 p-6">
+            <h1 className="text-2xl font-bold text-black flex items-center gap-2">
+              <span className="text-2xl">📝</span>
+              New Medical Report
+            </h1>
           </div>
+          
+          <form className="p-6 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Patient Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-3 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                placeholder="Enter patient's name"
+                required
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700">Age</label>
-            <input
-              type="number"
-              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700">Gender</label>
-            <select
-              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700">Main Complaint</label>
-            <input
-              type="text"
-              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700">Symptoms</label>
-            <input
-              type="text"
-              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700">Medical History</label>
-            <select
-              className="mt-2 block w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            >
-              <option value="">Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold"
-          >
-            ✅ Save Report
-          </button>
-        </form>
-      </div>
-
-      {/* Patient List Section with Border and Gap */}
-      <div className="border border-gray-300 rounded-3xl shadow-2xl bg-gradient-to-br from-blue-100 to-blue-300 p-8">
-        <h2 className="text-3xl font-bold text-blue-700 mb-6">👥 PATIENT LIST</h2>
-        <div className="relative mb-6">
-          <input
-            type="text"
-            placeholder="Search patients..."
-            className="w-full p-3 pl-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <Search className="absolute left-3 top-3 text-gray-500" size={20} />
-        </div>
-        <ul className="space-y-6">
-          {filteredPatients.map((patient, index) => (
-            <li
-              key={index}
-              className="p-6 border border-gray-300 rounded-2xl bg-white shadow-lg flex justify-between items-center hover:shadow-xl transition-transform hover:scale-105"
-            >
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-lg font-semibold text-gray-900">{patient.name}</p>
-                <p className="text-sm text-gray-600"><strong>Age:</strong> {patient.age}</p>
-                <p className="text-sm text-gray-600"><strong>Gender:</strong> {patient.gender}</p>
-                <p className="text-sm text-gray-600"><strong>Contact:</strong> {patient.contact}</p>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                <input
+                  type="number"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  className="w-full p-3 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                  placeholder="Age"
+                  required
+                />
               </div>
-              <div className="flex gap-3">
-                <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all shadow-md">
-                  ✏️ Edit/View
-                </button>
-                <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-all shadow-md">
-                  ❌ Delete
-                </button>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                <select
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  className="w-full p-3 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                  required
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
-            </li>
-          ))}
-        </ul>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Main Complaint</label>
+              <input
+                type="text"
+                value={mainComplaint}
+                onChange={(e) => setMainComplaint(e.target.value)}
+                className="w-full p-3 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                placeholder="Enter main complaint"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Symptoms</label>
+              <input
+                type="text"
+                value={symptoms}
+                onChange={(e) => setSymptoms(e.target.value)}
+                className="w-full p-3 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                placeholder="Enter symptoms"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Medical History</label>
+              <select
+                value={medicalHistory}
+                onChange={(e) => setMedicalHistory(e.target.value)}
+                className="w-full p-3 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                required
+              >
+                <option value="">Select Option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold shadow-md transition duration-300 hover:bg-blue-700 flex items-center justify-center gap-2"
+            >
+              <span className="text-xl">✅</span>
+              Save Report
+            </button>
+          </form>
+        </div>
+
+        {/* Reports List */}
+        <div className="bg-blue-100 shadow-lg shadow-white rounded-xl overflow-hidden">
+          <div className="bg-blue-500 p-6">
+            <h2 className="text-2xl font-bold text-black flex items-center gap-2">
+              <span className="text-2xl">👥</span>
+              Patient Reports
+            </h2>
+          </div>
+
+          <div className="p-6">
+            <div className="mb-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 text-gray-400" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search patients..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full p-3 pl-10 border border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+              {filteredPatients.map((patient, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-100 rounded-xl p-4 border border-blue-300 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold text-gray-800">{patient.name}</h3>
+                      <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                        <p>Age: {patient.age}</p>
+                        <p>Gender: {patient.gender}</p>
+                        <p>Contact: {patient.contact}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="p-2 bg-yellow-100 text-yellow-600 rounded-lg hover:bg-yellow-200 transition-colors">
+                        <Edit2 size={18} />
+                      </button>
+                      <button className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors">
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
