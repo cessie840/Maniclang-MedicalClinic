@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, User, FileText, Clipboard, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, FileText, Clipboard, LogOut } from "lucide-react";
 
 const Navbar = ({ setIsAuthenticated, isAuthenticated }) => {
   const navigate = useNavigate();
@@ -17,68 +17,78 @@ const Navbar = ({ setIsAuthenticated, isAuthenticated }) => {
   };
 
   return (
-    <nav className="h-screen w-64 bg-gradient-to-b from-[#5D81A5] to-[#7D9DBB] text-gray-100 p-6 shadow-lg flex flex-col justify-between fixed font-sans">
-      {/* Logo and Title */}
+    <nav className="h-screen w-64 bg-gradient-to-b from-[#363738] to-[#90c2f1] text-gray-100 p-6 shadow-lg flex flex-col justify-between fixed font-sans">
       <div className="flex flex-col h-full">
-        <h1 className="text-2xl font-bold text-center mb-6 tracking-wide text-white">
-          Maniclang's Medical
-        </h1>
+        <div className="flex items-center justify-center gap-3 mb-12 mt-4">
+          <span className=" text-white p-2"></span>
+          <h1 className="text-2xl font-bold tracking-wide text-white">
+            Maniclang's Medical
+          </h1>
+        </div>
 
         {/* Navigation Links */}
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-4">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                isActive ? "bg-[#4A6C8C] text-white font-semibold shadow-md" : "hover:bg-[#6789A8] hover:text-white"
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                isActive 
+                  ? "bg-cyan-500 text-white font-semibold shadow-md" 
+                  : "hover:bg-gray-700 hover:text-white"
               }`
             }
           >
-            <LayoutDashboard size={20} />
-            Dashboard
+            <LayoutDashboard className="text-blue-300" size={20} />
+            <span>Dashboard</span>
           </NavLink>
           <NavLink
             to="/Patient"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                isActive ? "bg-[#4A6C8C] text-white font-semibold shadow-md" : "hover:bg-[#6789A8] hover:text-white"
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                isActive 
+                  ? "bg-red-500 text-white font-semibold shadow-md" 
+                  : "hover:bg-gray-700 hover:text-white"
               }`
             }
           >
-            <User size={20} />
-            Patient
+            <Users className="text-green-300" size={20} />
+            <span>Patient Record</span>
           </NavLink>
           <NavLink
             to="/Reports"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                isActive ? "bg-[#4A6C8C] text-white font-semibold shadow-md" : "hover:bg-[#6789A8] hover:text-white"
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                isActive 
+                  ? "bg-green-500 text-white font-semibold shadow-md" 
+                  : "hover:bg-gray-700 hover:text-white"
               }`
             }
           >
-            <FileText size={20} />
-            Reports
+            <FileText className="text-violet-300" size={20} />
+            <span>Reports</span>
           </NavLink>
           <NavLink
             to="/ClinicalData"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                isActive ? "bg-[#4A6C8C] text-white font-semibold shadow-md" : "hover:bg-[#6789A8] hover:text-white"
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                isActive 
+                  ? "bg-yellow-500 text-white font-semibold shadow-md" 
+                  : "hover:bg-gray-700 hover:text-white"
               }`
             }
           >
-            <Clipboard size={20} />
-            Clinical Data
+            <Clipboard className="text-yellow-300" size={20} />
+            <span>Clinical Data</span>
           </NavLink>
         </ul>
 
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className="mt-auto flex items-center gap-3 px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all shadow-md"
+          className="mt-auto flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl transition-all shadow-md hover:from-red-600 hover:to-red-700"
         >
           <LogOut size={20} />
-          Logout
+          <span>Logout</span>
         </button>
       </div>
     </nav>
