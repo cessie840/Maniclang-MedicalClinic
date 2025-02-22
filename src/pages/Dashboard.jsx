@@ -28,35 +28,28 @@ const Dashboard = () => {
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-grow">
         {/* Patient Record */}
-        <div className="bg-blue-100 shadow-md rounded-xl p-5 flex justify-between items-center border border-blue-500">
+        <a href="/patient-record" className="bg-blue-100 shadow-md rounded-xl p-5 flex flex-col items-center border border-blue-500 cursor-pointer hover:shadow-lg transition">
+          <img src="RECORD.png" alt="Patient Record" className="w-50 h-50 mb-4" />
           <h2 className="text-xl font-medium text-gray-800">Patient Record</h2>
-          <button className="bg-blue-400 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm transition duration-300 hover:bg-blue-500">
-            Browse All
-          </button>
-        </div>
+        </a>
 
         {/* Reports */}
-        <div className="bg-blue-100 shadow-md rounded-xl p-5 flex justify-between items-center border border-blue-500">
+        <a href="/reports" className="bg-blue-100 shadow-md rounded-xl p-5 flex flex-col items-center border border-blue-500 cursor-pointer hover:shadow-lg transition">
+          <img src="REPORT.png" alt="Reports" className="w-50 h-50 mb-4" />
           <h2 className="text-xl font-medium text-gray-800">Reports</h2>
-          <button className="bg-blue-400 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm transition duration-300 hover:bg-blue-500">
-            Browse All
-          </button>
-        </div>
+        </a>
 
         {/* Appointments */}
-        <div className="bg-blue-100 shadow-md rounded-xl p-5 flex justify-between items-center border border-blue-500">
+        <a href="/appointments" className="bg-blue-100 shadow-md rounded-xl p-5 flex flex-col items-center border border-blue-500 cursor-pointer hover:shadow-lg transition">
+          <img src="APPOINTMENT.png" alt="Appointments" className="w-50 h-50 mb-4" />
           <h2 className="text-xl font-medium text-gray-800">Appointment</h2>
-          <button className="bg-blue-400 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm transition duration-300 hover:bg-blue-500">
-            Browse All
-          </button>
-        </div>
+        </a>
 
         {/* Add New Appointment */}
-        <div className="bg-blue-100 shadow-md rounded-xl p-5 flex justify-center items-center border border-blue-500">
-          <button className="text-blue-600 hover:text-blue-800 transition duration-300">
-            <PlusCircle size={55} strokeWidth={1.5} />
-          </button>
-        </div>
+        <a href="/new-appointment" className="bg-blue-100 shadow-md rounded-xl p-5 flex flex-col items-center border border-blue-500 cursor-pointer hover:shadow-lg transition">
+          <PlusCircle size={55} strokeWidth={1.5} className="text-blue-600" />
+          <h2 className="text-xl font-medium text-blue-600 mt-2">Add New</h2>
+        </a>
       </div>
 
       {/* Footer with linear gradient */}
