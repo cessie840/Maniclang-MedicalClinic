@@ -1,51 +1,99 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Reports = () => {
-  const patients = [
-    { name: 'John Doe', age: 30, gender: 'Male', contact: '123-456-7890' },
-    { name: 'Jane Smith', age: 25, gender: 'Female', contact: '987-654-3210' },
-    { name: 'Alex Johnson', age: 40, gender: 'Other', contact: '555-666-7777' },
-  ];
+  const [reports, setReports] = useState([]);
+  const [patients, setPatients] = useState([]);
+  const [formData, setFormData] = useState({
+    patient_id: '',
+    name: '',
+    main_complaint: '',
+    symptoms: '',
+    medical_history: '',
+  });
+
+  useEffect(() => {
+    fetchReports();
+    fetchPatients();
+  }, []);
+
+  const fetchReports = async () => {
+    try {
+      const response = await axios.get('http://localhost/backend/patient_management.php?endpoint=patient_reports');
+      setReports(response.data);
+    } catch (error) {
+      console.error('Error fetching reports:', error);
+    }
+  };
+
+  const fetchPatients = async () => {
+    try {
+      const response = await axios.get('http://localhost/backend/patient_management.php?endpoint=patients');
+      setPatients(response.data);
+    } catch (error) {
+      console.error('Error fetching patients:', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost/backend/patient_management.php?endpoint=patient_reports', formData);
+      fetchReports();
+      setFormData({ patient_id: '', name: '', main_complaint: '', symptoms: '', medical_history: '' });
+    } catch (error) {
+      console.error('Error saving report:', error);
+    }
+  };
+
+  const handleDelete = async (report_id) => {
+    if (!window.confirm('Are you sure you want to delete this report?')) return;
+    try {
+      await axios.delete('http://localhost/backend/patient_management.php?endpoint=patient_reports', {
+        data: { report_id },
+      });
+      fetchReports();
+    } catch (error) {
+      console.error('Error deleting report:', error);
+    }
+  };
+
   return (
     <div className='ml-[20%] grid grid-cols-2 h-[100vh]'>
       <div className='px-14 pt-24 bg-white shadow-lg w-full mx-auto'>
         <h1 className='text-3xl font-extrabold text-black mb-6'>Patient Report</h1>
-        <form className='space-y-5'>
+        <form onSubmit={handleSubmit} className='space-y-5'>
           <div>
-            <label className='block text-sm font-medium text-gray-700'>Name</label>
-            <input type='text' name='name' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
-          </div>
-
-          <div>
-            <label className='block text-sm font-medium text-gray-700'>Age</label>
-            <input type='number' name='age' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
-          </div>
-
-          <div>
-            <label className='block text-sm font-medium text-gray-700'>Gender</label>
-            <select name='gender' className='mt-1 block w-full p-2 border border-gray-300 rounded-md'>
-              <option value=''>Select Gender</option>
-              <option value='Male'>Male</option>
-              <option value='Female'>Female</option>
+            <label className='block text-sm font-medium text-gray-700'>Patient</label>
+            <select name='patient_id' value={formData.patient_id} onChange={handleChange} className='mt-1 block w-full p-2 border rounded-md' required>
+              <option value=''>Select Patient</option>
+              {patients.map((patient) => (
+                <option key={patient.patient_id} value={patient.patient_id}>{patient.name}</option>
+              ))}
             </select>
           </div>
 
           <div>
             <label className='block text-sm font-medium text-gray-700'>Main Complaint</label>
-            <input type='text' name='complaint' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
+            <input type='text' name='main_complaint' value={formData.main_complaint} onChange={handleChange} className='mt-1 block w-full p-2 border rounded-md' required />
           </div>
 
           <div>
             <label className='block text-sm font-medium text-gray-700'>Symptoms</label>
-            <input type='text' name='symptoms' className='mt-1 block w-full p-2 border border-gray-300 rounded-md' />
+            <input type='text' name='symptoms' value={formData.symptoms} onChange={handleChange} className='mt-1 block w-full p-2 border rounded-md' required />
           </div>
 
           <div>
             <label className='block text-sm font-medium text-gray-700'>Medical History</label>
-            <select name='medical' className='mt-1 block w-full p-2 border border-gray-300 rounded-md'>
+            <select name='medical_history' value={formData.medical_history} onChange={handleChange} className='mt-1 block w-full p-2 border rounded-md' required>
               <option value=''>Select</option>
-              <option value='Male'>Yes</option>
-              <option value='Female'>No</option>
+              <option value='Yes'>Yes</option>
+              <option value='No'>No</option>
             </select>
           </div>
 
@@ -54,35 +102,28 @@ const Reports = () => {
           </button>
         </form>
       </div>
+
       <div className='p-14 mt-10'>
-        <h2 className='text-2xl font-bold text-black mb-4'>Patient List</h2>
+        <h2 className='text-2xl font-bold text-black mb-4'>Patient Reports</h2>
         <ul className='space-y-2'>
-          {patients.map((patient, index) => (
-            <li key={index} className='p-3 border rounded-md bg-gray-100 flex justify-between items-center'>
+          {reports.map((report) => (
+            <li key={report.report_id} className='p-3 border rounded-md bg-gray-100 flex justify-between items-center'>
               <div>
-                <p><strong>Name:</strong> {patient.name}</p>
-                <p><strong>Age:</strong> {patient.age}</p>
-                <p><strong>Gender:</strong> {patient.gender}</p>
-                <p><strong>Contact:</strong> {patient.contact}</p>
+                <p><strong>Patient ID:</strong> {report.patient_id}</p>
+                <p><strong>Name:</strong> {report.name}</p>
+                <p><strong>Main Complaint:</strong> {report.main_complaint}</p>
+                <p><strong>Symptoms:</strong> {report.symptoms}</p>
+                <p><strong>Medical History:</strong> {report.medical_history}</p>
               </div>
-              <div className='flex gap-2'>
-              <button 
-                  onClick={() => handleEdit(index)}
-                  className='bg-green-500 text-black px-3 py-1 rounded-md hover:bg-green-600'>
-                  Edit/View
-                </button>
-                <button 
-                  onClick={() => handleDelete(index)}
-                  className='bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600'>
-                  Delete
-                </button>
-              </div>
+              <button onClick={() => handleDelete(report.report_id)} className='bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600'>
+                Delete
+              </button>
             </li>
           ))}
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Reports
+export default Reports;
