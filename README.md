@@ -21,18 +21,23 @@ Key Features & Functionalities:
     - Provisional/Confirmed Diagnosis
     - Prescription 
 
-Database Schema: 
+Download Backend Folder: https://drive.google.com/drive/folders/1c7cQ3BN0GoIv0a1norOTS3dykQASiurX?usp=drive_link
 
 UI/UX Design of the System: https://www.figma.com/design/mPWqr1o2OIpTqxvcegmhhp/Untitled?node-id=9-11&p=f
 
 Roles:
-- Product Owner: Maniclang
-- Scrum Master: 
-- Quality Assurance: 
-- Scrum Team Members:
-	- Frontend: Berino
-	- Backend: 
-	- UI/UX Design: Cruz
+- Product Owner: Maniclang Medical Clinic
+- Scrum Master: Maniclang
+- Scrum Team Members: 
+    - Berino
+    - Cruz
+    - Cabalejo
+    - Mahipus
+    - Basierto
+    - Malitic
+    - Blan
+    - Buendia
+    - Barcoma
 
 # React + Vite
 

@@ -63,7 +63,7 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
           <div className="flex justify-end mt-8">
             <button
               type="submit"
-              className="mt-2 w-full h-14 font-medium text-Blue text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-BorderBlue"
+              className="mt-2 w-full h-14 font-medium text-Blue text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-BorderBlue cursor-pointer "
             >
               Login
             </button>

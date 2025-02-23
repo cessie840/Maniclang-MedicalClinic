@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
-@theme {
+:root {
     --color-bluee: #bdddef;
+  }
+  
+.my-class {
+    background-color: var(--color-bluee);
 }
