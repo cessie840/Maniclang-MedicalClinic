@@ -81,13 +81,30 @@ const ClinicalData = () => {
       alert('Please select a patient');
       return;
     }
+  
+    try {
+      const response = await axios.post("http://localhost/backend/patient_management.php?endpoint=clinical_data", clinicalData, {
+        headers: { "Content-Type": "application/json" }
+      });
+  
+      alert("Clinical Data Added!");
+      setClinicalData({
+        patient_id: '',
+        heart_rate: '',
+        blood_pressure: '',
+        diagnosis: '',
+        prescription: ''
+      });
+  
+      fetchClinicalData(); // Refresh list
+    } catch (error) {
+      console.error("Error adding clinical data:", error);
+    }
   };
 
   return (
     //Frontend Elements
     <div className="ml-[18%] grid grid-cols-2 gap-x-10 h-screen bg-gray-100 p-8">
-
-       {/* Left Section: Clinical Data Form */}
        <div className="px-10 py-12 bg-white shadow-2xl w-full mx-auto rounded-3xl border border-gray-200">
         <h1 className="text-3xl font-bold text-blue-700 mb-6 flex items-center gap-3">
           <FaUserPlus className="text-blue-700" />ADD CLINICAL DATA</h1>
