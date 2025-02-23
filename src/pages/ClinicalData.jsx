@@ -42,6 +42,7 @@ const ClinicalData = () => {
   };
 
   const handleDelete = async (clinical_id) => {
+    if (!window.confirm('Are you sure you want to delete this report?')) return;
     try {
       await axios.delete('http://localhost/backend/patient_management.php?endpoint=clinical_data', 
       { data: { clinical_id }});
@@ -186,11 +187,11 @@ const ClinicalData = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Blood Pressure</label>
-              <input type="text" name="heart_rate" value={editData?.blood_pressure} onChange={handleEditChange} className="w-full p-3 border border-gray-300 rounded-lg" />
+              <input type="text" name="blood_pressure" value={editData?.blood_pressure} onChange={handleEditChange} className="w-full p-3 border border-gray-300 rounded-lg" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Diagnosis</label>
-              <input type="text" name="heart_rate" value={editData?.diagnosis} onChange={handleEditChange} className="w-full p-3 border border-gray-300 rounded-lg" />
+              <input type="text" name="diagnosis" value={editData?.diagnosis} onChange={handleEditChange} className="w-full p-3 border border-gray-300 rounded-lg" />
             </div>
             <label className="block text-sm font-medium text-gray-700">Prescription</label>
             <textarea

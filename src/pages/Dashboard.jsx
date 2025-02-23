@@ -33,8 +33,8 @@ const Dashboard = () => {
 
         {/* Appointments */}
         <Link to='/ClinicalData' className="bg-blue-100 shadow-md rounded-xl p-5 flex flex-col items-center border border-blue-500 cursor-pointer hover:shadow-lg transition">
-        <img src="APPOINTMENT.png" alt="Appointments" className="w-50 h-50 mb-4" />
-        <h2 className="text-xl font-medium text-gray-800">Appointment</h2>
+        <img src="CLINICALDATA.png" alt="ClinicalData" className="w-50 h-50 mb-4" />
+        <h2 className="text-xl font-medium text-gray-800">Clinical Data</h2>
         </Link>
 
         {/* Add New Appointment */}

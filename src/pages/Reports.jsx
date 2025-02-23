@@ -173,19 +173,14 @@ const Reports = () => {
               <X size={24} />
             </button>
             <h1 className="text-2xl font-bold text-blue-700 mb-6">✏️ Edit Report</h1>
-            {["main_complaint", "symptoms"].map((field) => (
-              <div key={field}>
-                <label className="block text-sm font-medium text-gray-700">{field.replace("_", " ").toUpperCase()}</label>
-                <input
-                  type="text"
-                  name={field}
-                  value={editData?.[field]}
-                  onChange={handleEditChange}
-                  className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-            ))}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Main Complaint</label>
+              <input type="text" name="main_complaint" value={editData?.main_complaint} onChange={handleEditChange} className="w-full p-3 border border-gray-300 rounded-lg" />
+            </div>
+            <div>
+            <label className="block text-sm font-medium text-gray-700">Symptoms</label>
+              <input type="text" name="symptoms" value={editData?.symptoms} onChange={handleEditChange} className="w-full p-3 border border-gray-300 rounded-lg" />
+            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Medical History</label>
               <select
